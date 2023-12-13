@@ -17,6 +17,8 @@ import {fonts} from '../../../constants/fonts';
 import ClaimCoinItem from '../../items/ClaimCoinItem';
 import {useNavigation} from '@react-navigation/native';
 import { Screens } from '../../../navigator/Screens';
+import SpinnerView from './SpinnerView';
+import { showAlert } from '../../../utils/Messages';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -31,7 +33,9 @@ const Home = () => {
     );
   };
 
-  const _onClaimCoins = () => {};
+  const _onClaimCoins = () => {
+    showAlert('success', '1000 Coins Claimed Successfully');
+  };
 
   const _onViewAll = () => navigation.navigate(Screens.Categories);
 
@@ -68,13 +72,7 @@ const Home = () => {
             contentContainerStyle={{paddingLeft: 16, paddingTop: 16}}
           />
 
-          <TouchableOpacity style={{margin: 24}}>
-            <Image
-              source={images.spinBtn}
-              style={styles.spinBtn}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
+          <SpinnerView />
         </ScrollView>
       </View>
     </BaseView>

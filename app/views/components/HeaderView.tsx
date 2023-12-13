@@ -7,6 +7,7 @@ import {fonts} from '../../constants/fonts';
 import {colors} from '../../constants/colors';
 import {images} from '../../constants/images';
 import ButtonView from './ButtonView';
+import { Screens } from '../../navigator/Screens';
 
 export interface HeaderViewProps {
   hasLogo?: boolean;
@@ -39,6 +40,9 @@ const HeaderView = (props: HeaderViewProps) => {
     }
   };
 
+  const _onMySubscriptions = () =>
+    navigation.navigate(Screens.MySubscriptions);
+
   return (
     <View style={styles.container}>
       {hasLogo && (
@@ -52,7 +56,7 @@ const HeaderView = (props: HeaderViewProps) => {
       )}
       {hasBack && (
         <TouchableOpacity style={styles.leftIconView} onPress={_onGoBack}>
-          <Icon name="chevron-back" type="ionicon" />
+          <Icon name="arrow-back" type="material" color={colors.light.accent} />
         </TouchableOpacity>
       )}
       <View style={{flex: 1}}>
@@ -63,7 +67,7 @@ const HeaderView = (props: HeaderViewProps) => {
           title="my subscriptions"
           containerStyle={{marginRight: 8}}
           buttonStyle={{borderRadius: 20}}
-          onPress={() => {}}
+          onPress={() => _onMySubscriptions()}
         />
       )}
     </View>

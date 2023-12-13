@@ -1,38 +1,48 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, FlatList} from 'react-native';
 import BaseView from '../../hoc/BaseView';
-import {images} from '../../../constants/images';
-import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../constants/dimens';
 import {colors} from '../../../constants/colors';
 import {fonts} from '../../../constants/fonts';
-import ClaimCoinItem from '../../items/ClaimCoinItem';
 import PackageItem from '../../items/PackageItem';
 import SearchView from '../../components/SearchView';
-import { categoriesJson } from '../../../json/categoriesJson';
+import {categoriesJson} from '../../../json/categoriesJson';
 import CategoryItem from '../../items/CategoryItem';
+import {useNavigation} from '@react-navigation/native';
+import {Screens} from '../../../navigator/Screens';
 
 const Categories = () => {
+  const navigation = useNavigation();
+  const [search, setSearch] = useState('');
 
-    const [search, setSearch] = useState('');
+  const [categories, setCategories] = useState(categoriesJson);
 
   const _renderPackage = ({item, index}: any) => {
     return <PackageItem item={item} index={index} onPress={() => {}} />;
   };
 
-  const _renderCategory = ({item, index} : any) => {
-    return (
-        <CategoryItem item={item} onPress={() => {}}/>
-    )
-  }
+  const _renderCategory = ({item}: any) => {
+    return <CategoryItem item={item} onPress={() => _onCategoryPress(item)} />;
+  };
+
+  const _onCategoryPress = (item: object) =>
+    navigation.navigate(Screens.Platforms, {category: item});
+
+  const _onSearchCategory = (text: string) => {
+    setSearch(text);
+    if (text) {
+      const newData = categoriesJson.filter(function (item) {
+        const itemData = item?.name
+          ? item?.name.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setCategories(newData);
+    } else {
+      setCategories(categoriesJson);
+    }
+  };
 
   return (
     <BaseView
@@ -66,14 +76,18 @@ const Categories = () => {
           <SearchView
             placeholder="search by subscription -categories"
             value={search}
-            onChangeText={text => setSearch(text)}
+            onChangeText={text => _onSearchCategory(text)}
           />
-          <FlatList
-            data={categoriesJson}
-            renderItem={_renderCategory}
-            numColumns={3}
-            style={{marginLeft: 16, marginTop: 16,}}
-          />
+          {categories.length > 0 ? (
+            <FlatList
+              data={categories}
+              renderItem={_renderCategory}
+              numColumns={3}
+              style={{marginLeft: 16, marginTop: 16}}
+            />
+          ) : (
+            <Text style={styles.noData}>No Categories found.</Text>
+          )}
         </ScrollView>
       </View>
     </BaseView>
@@ -99,8 +113,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingHorizontal: 16,
   },
-  spinBtn: {
-    height: 64,
-    width: '100%',
+  noData: {
+    fontFamily: fonts.medium,
+    color: colors.light.lightTextColor,
+    textAlign: 'center',
+    padding: 64,
   },
 });

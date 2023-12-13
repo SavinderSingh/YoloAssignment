@@ -1,11 +1,12 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import Home from '../views/screens/home/Home';
 import {Screens} from './Screens';
-import StudentScoreCard from '../views/screens/scorecard/StudentScoreCard';
 import {BottomNavigator} from './BottomNavigator';
 import Categories from '../views/screens/details/Categories';
+import Platforms from '../views/screens/details/Platforms';
+import PlatformDetail from '../views/screens/details/PlatformDetail';
+import MySubscriptions from '../views/screens/details/MySubscriptions';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,14 @@ const Routes = () => {
           presentation: 'fullScreenModal',
         }}>
         <Stack.Screen name="Main" component={MainRoutes} />
+        <Stack.Screen
+          name={Screens.PlatformDetail}
+          component={PlatformDetail}
+        />
+        <Stack.Screen
+          name={Screens.MySubscriptions}
+          component={MySubscriptions}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -35,6 +44,7 @@ const MainRoutes = () => {
       }}>
       <Stack.Screen name="Home" component={BottomNavigator} />
       <Stack.Screen name={Screens.Categories} component={Categories} />
+      <Stack.Screen name={Screens.Platforms} component={Platforms} />
     </Stack.Navigator>
   );
 };

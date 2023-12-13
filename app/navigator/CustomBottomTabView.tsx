@@ -1,10 +1,7 @@
-import {Icon} from '@rneui/base';
 import * as React from 'react';
 import {
-  Text,
   View,
   StyleSheet,
-  StyleProp,
   ViewStyle,
   TouchableOpacity,
   Image,
@@ -18,7 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentTabSelector} from '../redux/selectors';
 import {Screens} from './Screens';
 import {setCurrentTab} from '../redux/slices/homeSlice';
-import {useNavigation} from '@react-navigation/native';
+import { showAlert } from '../utils/Messages';
 
 const CustomBottomTabView = props => {
   const dispatch = useDispatch();
@@ -27,9 +24,10 @@ const CustomBottomTabView = props => {
 
   const _onTabPress = (tab: string) => {
     dispatch(setCurrentTab(tab));
-    if (tab === Screens.TabYoloPay) {
+    if (tab === Screens.TabHome) {
+      props.navigation.jumpTo(Screens.TabHome);
     } else {
-      props.navigation.jumpTo(tab);
+      showAlert('error', 'Available soon');
     }
   };
 

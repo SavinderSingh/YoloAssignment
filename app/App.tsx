@@ -4,6 +4,8 @@ import Routes from './navigator/Routes';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from './redux/configStore';
+import Toast from 'react-native-toast-message';
+import { toastConfig } from './views/hoc/Toast';
 
 const App = () => {
   useEffect(() => {
@@ -24,7 +26,7 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
         <Routes />
-        {/* <Toast refs={ref => Toast.setRef(ref)} config={toastConfig} /> */}
+        <Toast refs={ref => Toast.setRef(ref)} config={toastConfig} />
       </PersistGate>
     </Provider>
   );

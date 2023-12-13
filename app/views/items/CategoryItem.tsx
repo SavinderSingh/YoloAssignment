@@ -1,37 +1,31 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors } from '../../constants/colors';
-import { SCREEN_WIDTH } from '../../constants/dimens';
-import { fonts } from '../../constants/fonts';
-import { Image } from 'react-native';
-import { images } from '../../constants/images';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {colors} from '../../constants/colors';
+import {SCREEN_WIDTH} from '../../constants/dimens';
+import {fonts} from '../../constants/fonts';
+import {Image} from 'react-native';
+import {images} from '../../constants/images';
 
 interface CategoryItemProps {
-    item: object;
-    onPress: () => void;
+  item: object;
+  onPress: () => void;
 }
 
 const CategoryItem = (props: CategoryItemProps) => {
-    const {item, onPress} = props;
+  const {item, onPress} = props;
   return (
-    <TouchableOpacity style={styles.main}>
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.main} onPress={onPress}>
+      <View style={styles.container}>
         <View style={styles.imagesView}>
-            <Image 
-                source={images.claimSample}
-                style={styles.image1}
-            />
-            <Image 
-                source={images.claimSample}
-                style={styles.image2}
-            />
-            <View style={styles.image3}>
-                <Text style={styles.text}>+10</Text>
-            </View>
+          <Image source={images.claimSample} style={styles.image1} />
+          <Image source={images.claimSample} style={styles.image2} />
+          <View style={styles.image3}>
+            <Text style={styles.text}>+10</Text>
+          </View>
         </View>
-      <Text style={styles.name}>{item?.name}</Text>
-      <Text style={styles.platforms}>+20 platforms</Text>
-    </View>
+        <Text style={styles.name}>{item?.name}</Text>
+        <Text style={styles.platforms}>+20 platforms</Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -39,10 +33,10 @@ const CategoryItem = (props: CategoryItemProps) => {
 export default CategoryItem;
 
 const styles = StyleSheet.create({
-    main: {
-        marginRight: 16,
-        marginBottom: 16,
-    },
+  main: {
+    marginRight: 16,
+    marginBottom: 16,
+  },
   container: {
     height: 144,
     borderWidth: 1,
@@ -98,5 +92,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.light.textDefaultColor,
     fontFamily: fonts.medium,
-  }
+  },
 });
