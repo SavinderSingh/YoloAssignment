@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentTabSelector} from '../redux/selectors';
 import {Screens} from './Screens';
 import {setCurrentTab} from '../redux/slices/homeSlice';
-import { showAlert } from '../utils/Messages';
+import {showAlert} from '../utils/Messages';
 
 const CustomBottomTabView = props => {
   const dispatch = useDispatch();
@@ -23,8 +23,8 @@ const CustomBottomTabView = props => {
   const currentTab = useSelector(getCurrentTabSelector);
 
   const _onTabPress = (tab: string) => {
-    dispatch(setCurrentTab(tab));
     if (tab === Screens.TabHome) {
+      dispatch(setCurrentTab(tab));
       props.navigation.jumpTo(Screens.TabHome);
     } else {
       showAlert('error', 'Available soon');

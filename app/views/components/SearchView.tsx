@@ -1,8 +1,8 @@
 import {Icon} from '@rneui/base';
 import * as React from 'react';
-import {Text, View, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput, Platform} from 'react-native';
 import {colors} from '../../constants/colors';
-import { fonts } from '../../constants/fonts';
+import {fonts} from '../../constants/fonts';
 
 interface SearchViewProps {
   placeholder?: string;
@@ -33,15 +33,16 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: colors.light.borderColor,
     marginHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: Platform.OS === 'ios' ? 12 : 4,
     flexDirection: 'row',
     paddingHorizontal: 12,
     marginTop: 12,
+    alignItems: 'center',
   },
   textInput: {
     flex: 1,
     fontFamily: fonts.medium,
     color: colors.light.textDefaultColor,
-    paddingLeft: 12
+    paddingLeft: 12,
   },
 });

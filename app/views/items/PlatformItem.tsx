@@ -17,7 +17,7 @@ const PlatformItem = (props: PlatformItemProps) => {
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <Image source={item?.image} style={styles.image} />
-        <View style={{paddingLeft: 16}}>
+        <View style={{paddingLeft: 16, flex: 1}}>
           <Text style={styles.name}>{item?.name}</Text>
           {item?.status === '' && (
             <Text style={styles.name}>
@@ -31,13 +31,11 @@ const PlatformItem = (props: PlatformItemProps) => {
             <Text style={styles.plan}>plan expired on {item?.expiry_date}</Text>
           )}
           {item?.status === '' || item?.status === 'active' ? (
-            <TouchableOpacity style={styles.viewDetails} onPress={onPress}>
+            <TouchableOpacity style={[styles.viewDetails]} onPress={onPress}>
               <Text style={styles.viewDetailsText}>view details</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity
-              style={[styles.viewDetails, {width: 92}]}
-              onPress={onPress}>
+            <TouchableOpacity style={[styles.viewDetails]} onPress={onPress}>
               <Text style={[styles.viewDetailsText]}>renew again</Text>
             </TouchableOpacity>
           )}
@@ -70,7 +68,8 @@ const styles = StyleSheet.create({
   viewDetails: {
     borderBottomWidth: 1,
     borderBottomColor: colors.light.primary,
-    width: 84,
+    alignSelf: 'flex-start',
+    // width: 84,
   },
   name: {
     color: colors.light.accent,

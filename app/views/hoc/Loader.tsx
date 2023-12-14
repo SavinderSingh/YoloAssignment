@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {Overlay} from '@rneui/themed';
+import { colors } from '../../constants/colors';
 interface LoaderProps {
   isVisible: boolean;
   hasLoaderMessage?: boolean;
@@ -13,7 +14,7 @@ const Loader = (props: LoaderProps) => {
       isVisible={props.isVisible}
       overlayStyle={styles.overlayStyle}
       backdropStyle={styles.backdropStyle}>
-      <ActivityIndicator size="large" color={'#000'} />
+      <ActivityIndicator size="large" color={colors.light.primary} />
       {props.hasLoaderMessage && (
         <Text style={styles.message}>{props.loaderMessage}</Text>
       )}
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   backdropStyle: {
-    backgroundColor: '#ffffff80',
+    backgroundColor: '#00000080',
   },
   message: {},
 });

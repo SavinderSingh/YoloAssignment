@@ -66,7 +66,7 @@ const HeaderView = (props: HeaderViewProps) => {
         <ButtonView
           title="my subscriptions"
           containerStyle={{marginRight: 8}}
-          buttonStyle={{borderRadius: 20}}
+          buttonStyle={{borderRadius: 20, paddingHorizontal: 12}}
           onPress={() => _onMySubscriptions()}
         />
       )}
